@@ -55,11 +55,13 @@ class BST {
     void search(BSTnode* node, int key);
     void rdelete(BSTnode* node, int key);
     int findMin(BSTnode* node);
+    void printInorder(BSTnode* node);
 public:
 
     BST() {
         root = NULL;
     }
+    void printBSTsort();
     void printBST();
     void insertBST(int key);
     void searchBST(int key);
@@ -221,6 +223,22 @@ void BST::rdelete(BSTnode* node, int key) {
 
 }
 
+void BST::printInorder(BSTnode* node) {
+    if (node->left != NULL)
+        printInorder(node->left);
+    //if (node->left == NULL && node->right == NULL)
+        cout << node->data<<"   ";
+    if (node->right != NULL)
+        printInorder(node->right);
+
+}
+
+void BST::printBSTsort() {
+    cout << "\nSorted BST : ";
+    printInorder(root);
+    cout << "\n";
+}
+
 /*
  * 
  */
@@ -229,13 +247,14 @@ int main(int argc, char** argv) {
 
     BST bst;
     int choice = 0, key;
-    while (choice != 5) {
+    while (choice != 6) {
         cout << "\n ----Binary Search Tree---- " << endl;
         cout << "1. Insert " << endl;
         cout << "2. Search " << endl;
         cout << "3. Delete " << endl;
-        cout << "4. Print " << endl;
-        cout << "5. Exit" << endl;
+        cout << "4. Print Tree" << endl;
+        cout << "5. Sort Tree" << endl;
+        cout << "6. Exit" << endl;
         cout << "Enter choice: ";
         cin>>choice;
         switch (choice) {
@@ -259,6 +278,9 @@ int main(int argc, char** argv) {
                 bst.printBST();
                 break;
             case 5:
+                bst.printBSTsort();
+                break;
+            case 6:
                 break;
             default:
                 cout << "\nWrong choice, try again!" << endl;
